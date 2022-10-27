@@ -1,0 +1,13 @@
+search process incase needed later:
+
+
+
+    # Search for Factiva and navigate to the authentication page
+#     search_bar = wait.until(EC.element_to_be_clickable((By.XPATH, '//input[@placeholder="Find articles, books and more"]')))
+#     search_bar.send_keys('factiva')
+#     search_bar.send_keys(Keys.ENTER)
+#     wait.until(EC.element_to_be_clickable((By.XPATH, '(//a[@href="https://search.lib.utexas.edu/discovery/fulldisplay?docid=alma991058337984506011&context=L&vid=01UTAU_INST:SEARCH&lang=en&search_scope=MyInst_and_CI&adaptor=Local Search Engine&tab=Everything&query=any%2Ccontains%2Cfactiva&offset=0"])[2]'))).click()
+#     wait.until(EC.element_to_be_clickable((By.XPATH, '//a[@href="https://guides.lib.utexas.edu/db/144"]'))).click()
+#     driver.switch_to.window(driver.window_handles[0])
+#     driver.close()
+#     driver.switch_to.window(driver.window_handles[0])
