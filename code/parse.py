@@ -2,9 +2,8 @@ from bs4 import BeautifulSoup
 import regex as re
 
 
-def get_page_info(soup, counter, total):
+def get_page_info(soup, counter, total, article_links):
     
-    article_links = []
     map_dict = {
         'January': '1',
         'February': '1',
@@ -21,6 +20,15 @@ def get_page_info(soup, counter, total):
     }
     headlines = soup.find_all('tr', {'class': 'headline'})
     total += len(headlines)
+
+    if total == 1:
+        headline = headlines[0]
+        article_links.append(headline.find('a').get('href'))
+        sub_list = sum([subtitle.split(' ') for subtitle in headline.find('div').text.split(',') if len(re.findall('[0-9]+', subtitle)) > 0], [])
+        month = ''.join(set(sub_list) & set(map_dict.keys()))
+        counter[map_dict[month]] += 1
+
+        return counter, total, article_links
     
     for i, headline in enumerate(headlines):
         
@@ -31,11 +39,10 @@ def get_page_info(soup, counter, total):
             sub_list = sum([subtitle.split(' ') for subtitle in headline.find('div').text.split(',') if len(re.findall('[0-9]+', subtitle)) > 0], [])
             month = ''.join(set(sub_list) & set(map_dict.keys()))
             counter[map_dict[month]] += 1
-        
-    return counter, article_links, total
+    return counter, total, article_links
 
 
 
-def count_duplicates(soup):
+def get_duplicates(soup):
 
     return int(soup.find('span', {'id': 'dedupSummary'}).text.split(':')[1].strip())

@@ -1,10 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import (
-    TimeoutException, 
-    NoSuchElementException, 
+    TimeoutException,
     StaleElementReferenceException,
     ElementClickInterceptedException,
+    NoSuchElementException,
+    UnexpectedAlertPresentException,
 )
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,30 +14,33 @@ import time
 
 
 
-def enter_search(driver, wait, dates, year, search):
+
+def modify_search(driver, wait):
     
+    attempts = 0
+    while attempts < 5:
+        try:
+            wait.until(EC.element_to_be_clickable((By.ID, 'btnModifySearch'))).click()
+            break
+        except (StaleElementReferenceException, ElementClickInterceptedException):
+            attempts += 1
+
+
+def enter_search(driver, wait, date_dict, search):
+
     attempts = 0
     while attempts < 5:
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH, '//select[@name="dr"]'))).click()
             wait.until(EC.element_to_be_clickable((By.XPATH, '//option[@value="Custom"]'))).click()
-            driver.find_element(By.ID, 'frm').clear()
-            driver.find_element(By.ID, 'frm').send_keys('01')
-            driver.find_element(By.ID, 'frd').clear()
-            driver.find_element(By.ID, 'frd').send_keys('01')
-            driver.find_element(By.ID, 'fry').clear()
-            driver.find_element(By.ID, 'fry').send_keys(year)
-            driver.find_element(By.ID, 'tom').clear()
-            driver.find_element(By.ID, 'tom').send_keys(dates[0])
-            driver.find_element(By.ID, 'tod').clear()
-            driver.find_element(By.ID, 'tod').send_keys(dates[1])
-            driver.find_element(By.ID, 'toy').clear()
-            driver.find_element(By.ID, 'toy').send_keys(year)
             driver.find_element(By.XPATH, '//select[@name="isrd"]').click()
             wait.until(EC.element_to_be_clickable((By.XPATH, '//option[@value="High"]'))).click()
             search_box = driver.find_element(By.XPATH, '//textarea[@name="ftx"]')
             search_box.clear()
             search_box.send_keys(search)
+            for id_, value in date_dict.items():
+                driver.find_element(By.ID, id_).clear()
+                driver.find_element(By.ID, id_).send_keys(value)
             try:
                 driver.find_element(By.XPATH, '//div[@class="pillNoMenu"]').click()
             except NoSuchElementException:
@@ -45,12 +49,11 @@ def enter_search(driver, wait, dates, year, search):
             wait.until(EC.visibility_of_element_located((By.XPATH, '//span[@data-channel="Dowjones"]')))
             time.sleep(5)
             break
-        except UnexpectedAlertPresentException:
+        except (StaleElementReferenceException, ElementClickInterceptedException, UnexpectedAlertPresentException):
             attempts += 1
 
 
-
-def next_loop(driver, wait):
+def next_page(driver, wait):
     
     attempts = 0
     while attempts < 5:
@@ -59,21 +62,8 @@ def next_loop(driver, wait):
             wait.until(EC.visibility_of_element_located((By.XPATH, '//img[@src="../img/listmanager/progress.gif"]')))
             wait.until(EC.invisibility_of_element_located((By.XPATH, '//img[@src="../img/listmanager/progress.gif"]')))
             break
-        except (StaleElementReferenceException, ElementClickInterceptedException):
+        except (StaleElementReferenceException, ElementClickInterceptedException, UnexpectedAlertPresentException):
             attempts += 1
-
-
-
-
-def modify_search_loop(driver, wait):
-    
-    attempts = 0
-    while attempts < 5:
-        try:
-            wait.until(EC.element_to_be_clickable((By.ID, 'btnModifySearch'))).click()
-            break
-        except (StaleElementReferenceException, ElementClickInterceptedException):
-            attemps += 1
 
 
 def login(driver, wait, eid_username, eid_password):
@@ -101,7 +91,11 @@ def set_driver(path):
     return driver, wait
 
 
-def get_page(driver, url):
+def get_page(driver, wait, eid_username, eid_password):
 
-    driver.get(url)
+    driver.get('https://guides.lib.utexas.edu/db/144')
+    try:
+        login(driver, wait, eid_username, eid_password)
+    except TimeoutException:
+        pass
 
