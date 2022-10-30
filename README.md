@@ -36,6 +36,8 @@ Usage:
 
 4. Change "C://Users/usr/directory/chromedriver.exe" to the path of wherever you put 'chromedriver.exe' in setup
 
+5. If `search_list.pickle` exists, delete the file from factiva/code
+
 5. Run the whole notebook
 
 
@@ -44,4 +46,13 @@ Side notes:
 This scraper will automatically search and store data in your repo. If you stop the scraper or it stops because of an error, it will pick up where it left off. However, it will only pick up after the last full year completed.
 
 
-**** DO NOT DELETE 'search_list.pickle' UNTIL THE LIST HAS BEEN EXHAUSTED ****
+**** ONCE THE PROGRAM HAS RUN ONCE, DO NOT DELETE 'search_list.pickle' UNTIL THE LIST HAS BEEN EXHAUSTED ****
+
+
+Next steps:
+
+1. I would like to create a method that searches all years initially, so as to disclude the years without any articles. I think we could use the html in the frequency graph shown in the top left of the results page.
+
+2. I'm still fixing bugs as they appear
+
+If you'd like to contribute, email me at george.longoria@utexas.edu
