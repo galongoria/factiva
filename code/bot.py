@@ -13,28 +13,21 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 
-
-
-def modify_search(driver, wait):
-    
-    attempts = 0
-    while attempts < 5:
-        try:
-            wait.until(EC.element_to_be_clickable((By.ID, 'btnModifySearch'))).click()
-            break
-        except (StaleElementReferenceException, ElementClickInterceptedException):
-            attempts += 1
-
-
 def enter_search(driver, wait, date_dict, search):
 
     attempts = 0
-    while attempts < 5:
+    while attempts < 10:
         try:
-            wait.until(EC.element_to_be_clickable((By.XPATH, '//select[@name="dr"]'))).click()
-            wait.until(EC.element_to_be_clickable((By.XPATH, '//option[@value="Custom"]'))).click()
+            wait.until(
+                EC.element_to_be_clickable((By.XPATH, '//select[@name="dr"]'))
+            ).click()
+            wait.until(
+                EC.element_to_be_clickable((By.XPATH, '//option[@value="Custom"]'))
+            ).click()
             driver.find_element(By.XPATH, '//select[@name="isrd"]').click()
-            wait.until(EC.element_to_be_clickable((By.XPATH, '//option[@value="High"]'))).click()
+            wait.until(
+                EC.element_to_be_clickable((By.XPATH, '//option[@value="High"]'))
+            ).click()
             search_box = driver.find_element(By.XPATH, '//textarea[@name="ftx"]')
             search_box.clear()
             search_box.send_keys(search)
@@ -46,45 +39,72 @@ def enter_search(driver, wait, date_dict, search):
             except NoSuchElementException:
                 pass
             search_box.send_keys(Keys.ENTER)
-            wait.until(EC.visibility_of_element_located((By.XPATH, '//span[@data-channel="Dowjones"]')))
+            wait.until(
+                EC.visibility_of_element_located(
+                    (By.XPATH, '//span[@data-channel="Dowjones"]')
+                )
+            )
             time.sleep(5)
             break
-        except (StaleElementReferenceException, ElementClickInterceptedException, UnexpectedAlertPresentException):
+        except (
+            StaleElementReferenceException,
+            ElementClickInterceptedException,
+            UnexpectedAlertPresentException,
+        ):
+            print("Search failed")
             attempts += 1
 
 
 def next_page(driver, wait):
-    
+
     attempts = 0
     while attempts < 5:
         try:
-            wait.until(EC.visibility_of_element_located((By.XPATH, '//a[@class="nextItem"]'))).click()
-            wait.until(EC.visibility_of_element_located((By.XPATH, '//img[@src="../img/listmanager/progress.gif"]')))
-            wait.until(EC.invisibility_of_element_located((By.XPATH, '//img[@src="../img/listmanager/progress.gif"]')))
+            wait.until(
+                EC.visibility_of_element_located((By.XPATH, '//a[@class="nextItem"]'))
+            ).click()
+            wait.until(
+                EC.visibility_of_element_located(
+                    (By.XPATH, '//img[@src="../img/listmanager/progress.gif"]')
+                )
+            )
+            wait.until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH, '//img[@src="../img/listmanager/progress.gif"]')
+                )
+            )
             break
-        except (StaleElementReferenceException, ElementClickInterceptedException, UnexpectedAlertPresentException):
+        except (
+            StaleElementReferenceException,
+            ElementClickInterceptedException,
+            UnexpectedAlertPresentException,
+        ):
+            print("Click next failed")
             attempts += 1
 
 
 def login(driver, wait, eid_username, eid_password):
 
-    wait.until(EC.element_to_be_clickable((By.ID, 'username')))
-    driver.find_element(By.ID, 'username').send_keys(eid_username)
-    driver.find_element(By.XPATH, '//input[@id="password"]').send_keys(eid_password)    
+    wait.until(EC.element_to_be_clickable((By.ID, "username")))
+    driver.find_element(By.ID, "username").send_keys(eid_username)
+    driver.find_element(By.XPATH, '//input[@id="password"]').send_keys(eid_password)
     driver.find_element(By.XPATH, "//input[@value='Sign in']").click()
     try:
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@id='trust-browser-button']"))).click()
-        
+        wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH, "//button[@id='trust-browser-button']")
+            )
+        ).click()
+
     except TimeoutException:
-        print('Duo cookies still valid; proceeding to search page...')
+        print("Duo cookies still valid; proceeding to search page...")
 
 
 def set_driver(path):
 
-    
     option = webdriver.ChromeOptions()
     option.add_experimental_option("debuggerAddress", "localhost:9222")
-    driver = webdriver.Chrome(executable_path = path ,options=option)
+    driver = webdriver.Chrome(executable_path=path, options=option)
     wait = WebDriverWait(driver, 10)
     driver.set_page_load_timeout(20)
 
@@ -93,9 +113,8 @@ def set_driver(path):
 
 def get_page(driver, wait, eid_username, eid_password):
 
-    driver.get('https://guides.lib.utexas.edu/db/144')
+    driver.get("https://guides.lib.utexas.edu/db/144")
     try:
         login(driver, wait, eid_username, eid_password)
     except TimeoutException:
         pass
-
