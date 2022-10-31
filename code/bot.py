@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import (
@@ -10,7 +12,69 @@ from selenium.common.exceptions import (
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
-import time
+import time, os
+from bs4 import BeautifulSoup
+
+
+def open_tab(driver, wait):
+
+    driver.find_element(By.XPATH, "//body").send_keys(Keys.CONTROL + 't')
+
+
+
+def open_page(driver, wait, eid_username, eid_password):
+
+    attempts = 0
+
+    while attempts < 10:
+
+        try:
+            driver.get("https://guides.lib.utexas.edu/db/144")
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            if soup.find('label', {'for': 'email'}) == None:
+                break
+            else:
+                attempts += 1
+                continue
+
+        except (
+            StaleElementReferenceException,
+            ElementClickInterceptedException,
+            UnexpectedAlertPresentException,
+        ):
+
+            print('Get page failed')
+            time.sleep(3)
+            attempts += 1
+    try:
+
+        login(driver, wait, eid_username, eid_password)
+
+    except TimeoutException:
+
+        pass
+
+
+def get_new_page(driver, wait):
+
+    attempts = 0
+
+    while attempts < 10:
+
+        try:
+
+            driver.get("https://guides.lib.utexas.edu/db/144")
+            front_text = BeautifulSoup(driver.page_source, 'html.parser')
+            if "Sign in with your UT EID" in front_text.h1:
+                login(driver, wait, "gal767", os.getenv("eid_password"))
+
+            break
+        except TimeoutException as timeout_error:
+
+            print(timeout_error)
+            time.sleep(3)
+            attempts += 1
+
 
 
 def enter_search(driver, wait, date_dict, search):
@@ -50,15 +114,26 @@ def enter_search(driver, wait, date_dict, search):
             StaleElementReferenceException,
             ElementClickInterceptedException,
             UnexpectedAlertPresentException,
-        ):
-            print("Search failed")
+            
+        ) as action_error:
+
+            print(action_error)
+            time.sleep(3)
+            attempts += 1
+
+
+        except TimeoutException as timeout_error:
+
+            print(timeout_error)
+            time.sleep(3)
+            get_new_page(driver, wait)
             attempts += 1
 
 
 def next_page(driver, wait):
 
     attempts = 0
-    while attempts < 5:
+    while attempts < 10:
         try:
             wait.until(
                 EC.visibility_of_element_located((By.XPATH, '//a[@class="nextItem"]'))
@@ -80,6 +155,7 @@ def next_page(driver, wait):
             UnexpectedAlertPresentException,
         ):
             print("Click next failed")
+            time.sleep(3)
             attempts += 1
 
 
@@ -97,6 +173,7 @@ def login(driver, wait, eid_username, eid_password):
         ).click()
 
     except TimeoutException:
+
         print("Duo cookies still valid; proceeding to search page...")
 
 
@@ -110,11 +187,3 @@ def set_driver(path):
 
     return driver, wait
 
-
-def get_page(driver, wait, eid_username, eid_password):
-
-    driver.get("https://guides.lib.utexas.edu/db/144")
-    try:
-        login(driver, wait, eid_username, eid_password)
-    except TimeoutException:
-        pass

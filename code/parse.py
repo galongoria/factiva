@@ -82,3 +82,22 @@ def get_page_info(soup, counter, total, article_links):
 def get_duplicates(soup):
 
     return int(soup.find("span", {"id": "dedupSummary"}).text.split(":")[1].strip())
+
+
+
+def check_frequency_chart(soup):
+
+    text = soup.find('div', {'class': 'cd_div_expand'}).find('script', {'type': 'text/javascript'}).text
+    dates = {str(date): 0 for date in range(1995, 2021)}
+
+    for date, n in dates.items():
+        if date in chart_dates:
+            dates[date] = 1
+
+    return dates
+
+
+
+
+
+
