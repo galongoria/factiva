@@ -37,28 +37,27 @@ def get_page_info(soup, counter, total, article_links):
 
         return counter, total, article_links
 
+    if len(set(headline.text.split(".")[0] for headline in headlines)) == 1:
+
+        headline = headlines[0]
+        article_links.append(headline.find("a").get("href"))
+        sub_list = sum(
+            [
+                subtitle.split(" ")
+                for subtitle in headline.find("div").text.split(",")
+                if len(re.findall("[0-9]+", subtitle)) > 0
+            ],
+            [],
+        )
+        month = "".join(set(sub_list) & set(map_dict.keys()))
+        counter[map_dict[month]] += 1
+
+        return counter, total, article_links
+
+
     for i, headline in enumerate(headlines):
 
-        if (headline.text.split(".")[0] == headlines[i - 1].text.split(".")[0]) and (
-            total == 2
-        ):
-
-            headline = headlines[0]
-            article_links.append(headline.find("a").get("href"))
-            sub_list = sum(
-                [
-                    subtitle.split(" ")
-                    for subtitle in headline.find("div").text.split(",")
-                    if len(re.findall("[0-9]+", subtitle)) > 0
-                ],
-                [],
-            )
-            month = "".join(set(sub_list) & set(map_dict.keys()))
-            counter[map_dict[month]] += 1
-
-            return counter, total, article_links
-
-        elif headline.text.split(".")[0] == headlines[i - 1].text.split(".")[0]:
+        if headline.text.split(".")[0] == headlines[i - 1].text.split(".")[0]:
 
             continue
 

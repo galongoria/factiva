@@ -65,7 +65,7 @@ def get_new_page(driver, wait):
 
             driver.get("https://guides.lib.utexas.edu/db/144")
             front_text = BeautifulSoup(driver.page_source, 'html.parser')
-            if "Sign in with your UT EID" in front_text.h1:
+            if (front_text != None) and ("Sign in with your UT EID" in front_text):
                 login(driver, wait, "gal767", os.getenv("eid_password"))
 
             break
