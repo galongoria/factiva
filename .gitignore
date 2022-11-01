@@ -1,7 +1,8 @@
 # Data
 /data/raw/STEP4*
 /data/clean/*
-/data/article_soup/*
+/data/article_hrefs/*
+/code/searches
 
 # Pickles
 /code/search_list.pickle
