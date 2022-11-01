@@ -83,20 +83,23 @@ def get_duplicates(soup):
     return int(soup.find("span", {"id": "dedupSummary"}).text.split(":")[1].strip())
 
 
+def get_years(soup):
+
+    years = []
+    text = soup.find('div', {'class': 'cd_div_expand'}).find('script', {'type': 'text/javascript'}).text.split('"categories":')[1].split(',"seriesData":')[0]
+    for year in range(1995,2021):
+        if str(year) in text:
+            years.append(year)
+    return years
+
 
 def check_frequency_chart(soup):
 
-    text = soup.find('div', {'class': 'cd_div_expand'}).find('script', {'type': 'text/javascript'}).text
-    dates = {str(date): 0 for date in range(1995, 2021)}
 
-    for date, n in dates.items():
-        if date in chart_dates:
-            dates[date] = 1
+    if soup.find('tr', {'class': 'headline'}) == None:
 
-    return dates
+        return None
 
+    else:
 
-
-
-
-
+        return get_years(soup)

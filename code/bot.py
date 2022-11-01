@@ -14,6 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 import time, os
 from bs4 import BeautifulSoup
+import pandas as pd
 
 
 def open_tab(driver, wait):
@@ -71,7 +72,7 @@ def get_new_page(driver, wait):
             break
         except TimeoutException as timeout_error:
 
-            print(timeout_error)
+            pass
             time.sleep(3)
             attempts += 1
 
@@ -117,14 +118,14 @@ def enter_search(driver, wait, date_dict, search):
             
         ) as action_error:
 
-            print(action_error)
+            pass
             time.sleep(3)
             attempts += 1
 
 
         except TimeoutException as timeout_error:
 
-            print(timeout_error)
+            pass
             time.sleep(3)
             get_new_page(driver, wait)
             attempts += 1
