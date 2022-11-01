@@ -1,4 +1,4 @@
-SETUP INSTRUCTIONS PERTAIN TO THOSE LOGGING IN THROUGH THE UT STUDENT PORTAL
+SETUP INSTRUCTIONS PERTAIN TO UT STUDENTS
 
 Setup:
 
@@ -11,13 +11,9 @@ Setup:
 4. Copy and paste: chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\directory\localhost"
 (A Chrome browser should immediately open upon entering this command)
 
-5. Create a .env file containing the following:
+5. Clone this repo locally and create a directory called `data`. Within `data`, create two directories called `article_hrefs` and `clean`
 
-'eid_password' = REPLACE_WITH_EID_PASSWORD
-
-6. Clone this repo locally and create a directory called `data`. Within `data`, create two directories called `article_soup` and `clean`
-
-7. I'm going to add a requirements.txt soon, but for now here's what you'll need to install yourself to run the notebook:
+6. I'm going to add a requirements.txt soon, but for now here's what you'll need to install yourself to run the notebook:
 
   pandas
   dotenv
@@ -25,34 +21,30 @@ Setup:
   regex
   bs4
 
+** Optional ** – Only necessary if you want to contribute
+7. Create a .env file containing your eid password
 
 Usage:
 
 1. Open the the notebook scrape.ipynb
 
-2. At the bottom of the notebook, you will see: get_all_frequencies(some_ut_eid, os.get.env('eid_password'), "C://Users/usr/directory/chromedriver.exe")
-
-3. Change `some_ut_eid` to your UT eid
-
-4. Change "C://Users/usr/directory/chromedriver.exe" to the path of wherever you put 'chromedriver.exe' in setup
-
-5. If `search_list.pickle` exists, delete the file from factiva/code
+2. Replace all the variables at the top with names relevant to you
 
 5. Run the whole notebook
-
 
 Side notes:
 
 This scraper will automatically search and store data in your repo. If you stop the scraper or it stops because of an error, it will pick up where it left off. However, it will only pick up after the last full year completed.
 
 
-**** ONCE THE PROGRAM HAS RUN ONCE, DO NOT DELETE 'search_list.pickle' UNTIL THE LIST HAS BEEN EXHAUSTED ****
+**** ONCE THE PROGRAM HAS RUN ONCE, DO NOT DELETE 'searches.pickle' UNTIL THE LIST HAS BEEN EXHAUSTED ****
+
+If you delete 'searches.pickle', you will lose where you left off and will need to start the scraping process from the first search.
 
 
 Next steps:
 
-1. I would like to create a method that searches all years initially, so as to disclude the years without any articles. I think we could use the html in the frequency graph shown in the top left of the results page.
-
+1. When the program runs for a long time, the user is signed out and the scraper stops working. I'm trying to determine where this happens and fix the issue.
 2. I'm still fixing bugs as they appear
 
-If you'd like to contribute, email me at george.longoria@utexas.edu
+If you are a UT student and would like to contribute, email me at george.longoria@utexas.edu
