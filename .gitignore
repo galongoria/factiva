@@ -1,3 +1,12 @@
+# Data
+/data/raw/STEP4*
+/data/clean/*
+/data/article_hrefs/*
+/code/searches.pickle
+
+# Pickles
+/code/search_list.pickle
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

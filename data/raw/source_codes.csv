@@ -1,0 +1,12 @@
+﻿country,Newspaper_code,Newspaper_name,search command
+US,sfusat,USA Today (All sources),rst=sfusat and fds=
+US,sfwsj,The Wall Street Journal (All Sources),rst=sfwsj and fds=
+US,sfnyt,The New York Times (All Sources),rst=sfnyt and fds=
+CA,sfglob,The Globe and Mail (All sources),rst=sfglob and fds=
+GB,sfftftp,Financial Times (All sources),(rst=ftft or rst=ftcom) and fds=
+DE,sfsddzp,Suddeutsche Zeitung (All sources),(rst=sddz or rst=sudzeit or rst=sz) and fds=
+IT,sfcordesp,Corriere della Sera (All sources),(rst=cordes or rst=coronl or rst=corsup) and fds=
+ES,sfelpaisp,El Pais (All sources),(rst=paisba or rst=paisbi or rst=paise or rst=paisma or rst=paisn or rst=psalud or rst=paisse or rst=paisva or rst=ep or rst=elpais) and fds=
+FR,sffigarop,Le Figaro (All sources),(rst=lf or rst=figaro or rst=figbour or rst=figetu or rst=figmag or rst=figpre) and fds=
+JP,sfmaip,Mainichi Shimbun (All sources),(rst=mainhq or rst=mainlo or rst=maimep or rst=maicnr or rst=maioti) and fds=
+JP,sfsankeip,Sankei Shimbun (All sources),(rst=snkosa or rst=snkeis or rst=snkspo) and fds=
