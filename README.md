@@ -45,6 +45,7 @@ If you delete 'searches.pickle', you will lose where you left off and will need 
 Next steps:
 
 1. When the program runs for a long time, the user is signed out and the scraper stops working. I'm trying to determine where this happens and fix the issue.
+2. In step4_scraper, the articles save in a list of lists for some reason. If someone sees where/why the code does this point it out and I'll change it because this isn't good
 2. I'm still fixing bugs as they appear
 
 If you are a UT student and would like to contribute, email me at george.longoria@utexas.edu
