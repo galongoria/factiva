@@ -11,18 +11,16 @@ Setup:
 4. Copy and paste: chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\directory\localhost"
 (A Chrome browser should immediately open upon entering this command)
 
-5. Clone this repo locally and create a directory called `data`. Within `data`, create two directories called `article_hrefs` and `clean`
-
-6. I'm going to add a requirements.txt soon, but for now here's what you'll need to install yourself to run the notebook:
+5. I'm going to add a requirements.txt soon, but for now here's what you'll need to install yourself to run the notebook:
 
   pandas
-  dotenv
+  python-dotenv
   selenium
   regex
   bs4
 
 ** Optional ** – Only necessary if you want to contribute
-7. Create a .env file containing your eid password
+6. Create a .env file containing your eid password
 
 Usage:
 
@@ -30,7 +28,7 @@ Usage:
 
 2. Replace all the variables at the top with names relevant to you
 
-5. Run the whole notebook
+3. Run the whole notebook
 
 Side notes:
 
