@@ -6,7 +6,7 @@ Setup:
 
 2. In the root directory, or otherwise C:/Users/usr/, create a new directory and store 'chromedriver.exe' that was downloaded in step 1
 
-3. Open the terminal and cd to the directory you just created (e.g. cd C:\Users\usr\directory\)
+3. Open the terminal and copy and paste: cd C:\Program Files (x86)\Google\Chrome\Application
 
 4. Copy and paste: chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\directory\localhost"
 (A Chrome browser should immediately open upon entering this command)
