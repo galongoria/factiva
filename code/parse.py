@@ -21,22 +21,6 @@ def get_page_info(soup, counter, total, article_links):
     headlines = soup.find_all("tr", {"class": "headline"})
     total += len(headlines)
 
-    if total == 1:
-        headline = headlines[0]
-        article_links.append(headline.find("a").get("href"))
-        sub_list = sum(
-            [
-                subtitle.split(" ")
-                for subtitle in headline.find("div").text.split(",")
-                if len(re.findall("[0-9]+", subtitle)) > 0
-            ],
-            [],
-        )
-        month = "".join(set(sub_list) & set(map_dict.keys()))
-        counter[map_dict[month]] += 1
-
-        return counter, total, article_links
-
     if len(set(headline.text.split(".")[0] for headline in headlines)) == 1:
 
         headline = headlines[0]
@@ -94,7 +78,6 @@ def get_years(soup):
 
 
 def check_frequency_chart(soup):
-
 
     if soup.find('tr', {'class': 'headline'}) == None:
 

@@ -14,13 +14,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 import time, os
 from bs4 import BeautifulSoup
-import pandas as pd
-
-
-def open_tab(driver, wait):
-
-    driver.find_element(By.XPATH, "//body").send_keys(Keys.CONTROL + 't')
-
 
 
 def open_page(driver, wait, eid_username, eid_password):
