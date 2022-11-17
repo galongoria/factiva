@@ -86,3 +86,16 @@ def check_frequency_chart(soup):
     else:
 
         return get_years(soup)
+    
+def get_article_info(page_source, dict_,):
+    
+    soup = BeautifulSoup(page_source, 'html.parser')
+    for tr in soup.find('div', {'class': 'article'}).tbody:
+        try:
+            tds = tr.find_all('td')
+            index = tds[0].text.strip()
+            text = tds[1].text.strip()
+        except AttributeError:
+            pass
+        dict_[index] = text
+    return dict_

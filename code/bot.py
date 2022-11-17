@@ -181,3 +181,25 @@ def set_driver(path):
 
     return driver, wait
 
+
+def get_href_page(driver, wait, href):
+
+    attempts = 0
+    while attempts < 10:
+        try:
+            driver.get(href)
+            wait.until(EC.element_to_be_clickable((By.XPATH, '//span[@id="articleViewAs"]'))).click()
+            wait.until(EC.element_to_be_clickable((By.XPATH, '//a[contains(text(), "Full Article/Report plus Indexing")]'))).click()
+            break
+        except TimeoutException:
+            time.sleep(10)
+            attempts += 1
+
+
+def check_page(driver, wait, href):
+    
+    try:
+        button = wait.until(EC.element_to_be_clickable((By.XPATH, '//span[@id="articleViewAs"]')))
+    except TimeoutException:
+        time.sleep(3)
+        get_href_page(driver, wait, href)
