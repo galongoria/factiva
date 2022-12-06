@@ -2,27 +2,27 @@
 
 Install this entire repository by either:
 
-1. Opening the terminal and entering the command:
+#### 1. Opening the terminal and entering the command:
  
 ```
 git clone https://github.com/galongoria/factiva.git
 ```
 
-2. Downloading it from the project repository at Factiva_project/Factiva_guide/STEP4/STEP4_Austin_new_code.
-  __DOWNLOAD THE ENTIRE PROJECT FOLDER, NOT JUST THE CODE FOLDER.__
+#### 2. Downloading it from the project repository at Factiva_project/Factiva_guide/STEP4/STEP4_Austin_new_code.
+  __DOWNLOAD THE ENTIRE PROJECT FOLDER, NOT JUST THE CODE FILES.__
 
 
 ## Setup – Windows Users
 
-1. Go to https://chromedriver.chromium.org/downloads and install the chromedriver that supports your version of Chrome
+#### 1. Go to https://chromedriver.chromium.org/downloads and install the chromedriver that supports your version of Chrome
 
-2. In the root directory, or otherwise `C:/Users/usr/`, create a new folder and store 'chromedriver.exe' that was downloaded in step 1.
+#### 2. In the root directory, or otherwise `C:/Users/usr/`, create a new folder and store 'chromedriver.exe' that was downloaded in step 1.
 
 For the instructions refer to this folder as `step1_directory`
 
 If my profile on Windows was called factiva_user, the path to chromedrive would be: `C:/Users/factiva_user/step1_directory/chromedriver.exe`
 
-3. The next step is dependent on where your Chrome data is stored. 
+#### 3. The next step is dependent on where your Chrome data is stored. 
 
 First, try the following command in your terminal:
 
@@ -38,7 +38,7 @@ If you receive an error message saying, "The system cannot find the path specifi
 cd C:\Program Files\Google\Chrome\Application
 ```
 
-4. Enter the following command in your terminal:
+#### 4. Enter the following command in your terminal:
 
 ```
 chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step1_directory\localhost"
@@ -66,7 +66,7 @@ chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\galon\step1_di
 
 ## Dependencies
 
-1. Install the necessary packages by either moving into the repository and installing the requirements.txt, or by simply opening the terminal and typing:
+#### 1. Install the necessary packages by either moving into the repository and installing the requirements.txt, or by simply opening the terminal and typing:
 
 ```
 pip3 install pandas python-dotenv selenium regex bs4
@@ -74,15 +74,15 @@ pip3 install pandas python-dotenv selenium regex bs4
 
 __Optional – only necessary if you want to contribute__
 
-2. Create a .env file containing your eid password. If you need help with this and are a UT student, please contact me using the email at the bottom of the instructions.
+#### 2. Create a .env file containing your eid password. If you need help with this and are a UT student, please contact me using the email at the bottom of the instructions.
 
 ## Usage:
 
-1. Open the the notebook scrape.ipynb
+#### 1. Open the the notebook scrape.ipynb
 
-2. Replace all the variables at the top with names relevant to you. The notebook has detailed instructions in the first cell.
+#### 2. Replace all the variables at the top with names relevant to you. The notebook has detailed instructions in the first cell.
 
-3. Run the whole notebook
+#### 3. Run the whole notebook
 
 ## Side notes:
 
@@ -96,8 +96,8 @@ If you delete 'searches.pickle', you will lose where you left off and will need 
 
 Next steps:
 
-1. When the program runs for a long time, the user is signed out and the scraper stops working. I'm trying to determine where this happens and fix the issue.
-2. In step4_scraper, the articles save in a list of lists for some reason. If someone sees where/why the code does this point it out and I'll change it because this isn't good
-2. I'm still fixing bugs as they appear
+##### 1. When the program runs for a long time, the user is signed out and the scraper stops working. I'm trying to determine where this happens and fix the issue.
+##### 2. In step4_scraper, the articles save in a list of lists for some reason. If someone sees where/why the code does this point it out and I'll change it because this isn't good
+##### 3. I'm still fixing bugs as they appear
 
 If you are a UT student and would like to contribute, email me at george.longoria@utexas.edu
