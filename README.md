@@ -1,14 +1,16 @@
 ## Installing the code
 
-Install this entire repository by either:
+Install this entire repository one of two ways:
 
-#### 1. Opening the terminal and entering the command:
+#### 1. Open the terminal and entering the command:
  
 ```
 git clone https://github.com/galongoria/factiva.git
 ```
 
-#### 2. Downloading it from the project repository at Factiva_project/Factiva_guide/STEP4/STEP4_Austin_new_code.
+or
+
+#### 2. Download it from the project repository at Factiva_project/Factiva_guide/STEP4/STEP4_Austin_new_code.
 
 ### __DOWNLOAD THE ENTIRE PROJECT FOLDER, NOT JUST THE CODE FILES.__
 
