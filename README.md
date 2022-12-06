@@ -14,29 +14,40 @@ If my profile on Windows was called factiva_user, the path to chromedrive would 
 
 First, try the following command in your terminal:
 
-```cd C:\Program Files (x86)\Google\Chrome\Application```
+```
+cd C:\Program Files (x86)\Google\Chrome\Application
+```
 
 If there is not error message, continue to step 4.
 
 If you receive an error message saying, "The system cannot find the path specified.": , then try the following command:
                 
-```cd C:\Program Files\Google\Chrome\Application```
+```
+cd C:\Program Files\Google\Chrome\Application
+```
 
 4. Enter the following command in your terminal:
 
-```chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step1_directory\localhost"```
+```
+chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step1_directory\localhost"
+
+```
 
 (A Chrome browser should immediately open upon entering this command)
 
 * Note that you will need to perform this step again if you close this Chrome window. You can expedite this process by copying and pasting either:
 
-```cd C:\Program Files (x86)\Google\Chrome\Application
-chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step1_directory\localhost"```
+```
+cd C:\Program Files (x86)\Google\Chrome\Application
+chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step1_directory\localhost"
+```
 
 or
 
-```cd C:\Program Files\Google\Chrome\Application
-chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\galon\step1_directory\localhost"```
+```
+cd C:\Program Files\Google\Chrome\Application
+chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\galon\step1_directory\localhost"
+```
 
 
 5. I'm going to add a requirements.txt soon, but for now here's what you'll need to install yourself to run the notebook:
