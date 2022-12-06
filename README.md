@@ -1,4 +1,16 @@
-SETUP INSTRUCTIONS PERTAIN TO UT STUDENTS
+## Installing the code
+
+Install this entire repository by either:
+
+1. Opening the terminal and entering the command:
+ 
+```
+git clone https://github.com/galongoria/factiva.git
+```
+
+2. Downloading it from the project repository at Factiva_project/Factiva_guide/STEP4/STEP4_Austin_new_code.
+  __DOWNLOAD THE ENTIRE PROJECT FOLDER, NOT JUST THE CODE FOLDER.__
+
 
 ## Setup – Windows Users
 
@@ -50,17 +62,19 @@ chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\galon\step1_di
 ```
 
 
-5. I'm going to add a requirements.txt soon, but for now here's what you'll need to install yourself to run the notebook:
+## Setup – Mac Users
 
-  pandas
-  python-dotenv
-  selenium
-  regex
-  bs4
+## Dependencies
 
-** Optional ** – Only necessary if you want to contribute
+1. Install the necessary packages by either moving into the repository and installing the requirements.txt, or by simply opening the terminal and typing:
 
-6. Create a .env file containing your eid password
+```
+pip3 install pandas python-dotenv selenium regex bs4
+```
+
+__Optional – only necessary if you want to contribute__
+
+2. Create a .env file containing your eid password. If you need help with this and are a UT student, please contact me using the email at the bottom of the instructions.
 
 ## Usage:
 
