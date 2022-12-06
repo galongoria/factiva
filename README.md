@@ -9,18 +9,19 @@ git clone https://github.com/galongoria/factiva.git
 ```
 
 #### 2. Downloading it from the project repository at Factiva_project/Factiva_guide/STEP4/STEP4_Austin_new_code.
-  __DOWNLOAD THE ENTIRE PROJECT FOLDER, NOT JUST THE CODE FILES.__
+
+### __DOWNLOAD THE ENTIRE PROJECT FOLDER, NOT JUST THE CODE FILES.__
 
 
 ## Setup – Windows Users
 
 #### 1. Go to https://chromedriver.chromium.org/downloads and install the chromedriver that supports your version of Chrome
 
-#### 2. In the root directory, or otherwise `C:/Users/usr/`, create a new folder and store 'chromedriver.exe' that was downloaded in step 1.
+#### 2. In the root directory, or otherwise `C:/Users/usr/`, create a new folder and store 'chromedriver.exe' that was downloaded in the previous step.
 
-For the instructions refer to this folder as `step1_directory`
+* For the instructions refer to this folder as `step4_directory`, but you can name it whatever you'd like.
 
-If my profile on Windows was called factiva_user, the path to chromedrive would be: `C:/Users/factiva_user/step1_directory/chromedriver.exe`
+* If my profile on Windows was called factiva_user, the path to chromedriver would be: `C:/Users/factiva_user/step4_directory/chromedriver.exe`
 
 #### 3. The next step is dependent on where your Chrome data is stored. 
 
@@ -30,9 +31,9 @@ First, try the following command in your terminal:
 cd C:\Program Files (x86)\Google\Chrome\Application
 ```
 
-If there is not error message, continue to step 4.
+* If there is not error message, continue to step 4.
 
-If you receive an error message saying, "The system cannot find the path specified.": , then try the following command:
+* If you receive an error message saying, "The system cannot find the path specified.": , then try the following command:
                 
 ```
 cd C:\Program Files\Google\Chrome\Application
@@ -41,28 +42,47 @@ cd C:\Program Files\Google\Chrome\Application
 #### 4. Enter the following command in your terminal:
 
 ```
-chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step1_directory\localhost"
+chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step4_directory\localhost"
 
 ```
 
-(A Chrome browser should immediately open upon entering this command)
+* A Chrome browser should immediately open upon entering this command
 
 * Note that you will need to perform this step again if you close this Chrome window. You can expedite this process by copying and pasting either:
 
 ```
 cd C:\Program Files (x86)\Google\Chrome\Application
-chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step1_directory\localhost"
+chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step4_directory\localhost"
 ```
 
 or
 
 ```
 cd C:\Program Files\Google\Chrome\Application
-chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\galon\step1_directory\localhost"
+chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\galon\step4_directory\localhost"
 ```
 
-
 ## Setup – Mac Users
+
+#### 1. Go to https://chromedriver.chromium.org/downloads and install the chromedriver that supports your version of Chrome
+
+#### 2. In the root directory, or otherwise `/Users/usr' create a new folder and store 'chromedriver.exe' that was downloaded in the previous step.
+
+* For the instructions refer to this folder as `step4_directory`
+
+* If my profile on Mac was called factiva_user, the path to chromedriver would be: `/Users/factiva_user/step4_directory/chromedriver`
+
+#### 3. Enter the following command in your terminal:
+
+```
+Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-date-dir=/Users/factiva_user/step4_directory/chromedriver/localhost
+
+```
+
+* A Chrome browser should immediately open upon entering this command
+
+* Note that you will need to perform this step again if you close this Chrome window. 
+
 
 ## Dependencies
 
@@ -78,7 +98,7 @@ __Optional – only necessary if you want to contribute__
 
 ## Usage:
 
-#### 1. Open the the notebook scrape.ipynb
+#### 1. Open the the notebook scrape_step4.ipynb
 
 #### 2. Replace all the variables at the top with names relevant to you. The notebook has detailed instructions in the first cell.
 
