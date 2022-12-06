@@ -77,7 +77,7 @@ chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\galon\step4_di
 #### 3. Enter the following command in your terminal:
 
 ```
-Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-date-dir=/Users/factiva_user/step4_directory/chromedriver/localhost
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-date-dir=/Users/factiva_user/step4_directory/chromedriver/localhost
 
 ```
 
