@@ -23,7 +23,7 @@ or
 
 * For these instructions refer to this folder as `step4_directory`, but you can name it whatever you'd like.
 
-* If my profile on Windows was called "bevo_longhorn", the path to chromedriver would be: `C:/Users/factiva_user/step4_directory/chromedriver.exe`
+* If my profile on Windows was called "bevo_longhorn", the path to chromedriver would be: `C:/Users/bevo_longhorn/step4_directory/chromedriver.exe`
 
 #### 3. The next step is dependent on where your Chrome data is stored. 
 
@@ -44,7 +44,7 @@ cd C:\Program Files\Google\Chrome\Application
 #### 4. Enter the following command in your terminal:
 
 ```
-chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step4_directory\localhost"
+chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\bevo_longhorn\step4_directory\localhost"
 
 ```
 
@@ -54,14 +54,14 @@ chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step4_dire
 
 ```
 cd C:\Program Files (x86)\Google\Chrome\Application
-chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\usr\step4_directory\localhost"
+chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\bevo_longhorn\step4_directory\localhost"
 ```
 
 or
 
 ```
 cd C:\Program Files\Google\Chrome\Application
-chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\galon\step4_directory\localhost"
+chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\bevo_longhorn\step4_directory\localhost"
 ```
 
 Depending on the command that worked for you in this step
@@ -74,12 +74,12 @@ Depending on the command that worked for you in this step
 
 * For these instructions refer to this folder as `step4_directory`
 
-* If my profile on Mac was called "bevo_longhorn", the path to chromedriver would be: `/Users/factiva_user/step4_directory/chromedriver`
+* If my profile on Mac was called "bevo_longhorn", the path to chromedriver would be: `/Users/bevo_longhorn/step4_directory/chromedriver`
 
 #### 3. Enter the following command in your terminal:
 
 ```
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=/Users/factiva_user/step4_directory/localhost
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=/Users/bevo_longhorn/step4_directory/localhost
 
 ```
 
