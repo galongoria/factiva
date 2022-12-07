@@ -1,4 +1,4 @@
-## Installing the code
+## Installing
 
 Install this entire repository one of two ways:
 
