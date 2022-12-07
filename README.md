@@ -64,7 +64,7 @@ cd C:\Program Files\Google\Chrome\Application
 chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\bevo_longhorn\step4_directory\localhost"
 ```
 
-Depending on the command that worked for you in this step
+Depending on the command that worked for you in Step 3
 
 ## Setup – Mac Users
 
