@@ -10,7 +10,7 @@ git clone https://github.com/galongoria/factiva.git
 
 or
 
-#### 2. Download it from the project repository at Factiva_project/Factiva_guide/STEP4/STEP4_Austin_new_code.
+#### 2. Download it from the project repository at `Factiva_project/Factiva_guide/STEP4/STEP4_Austin_new_code`.
 
 ### __DOWNLOAD THE ENTIRE PROJECT FOLDER, NOT JUST THE CODE FILES.__
 
@@ -98,11 +98,11 @@ pip3 install pandas python-dotenv selenium regex bs4
 
 __Optional – only necessary if you want to contribute__
 
-#### 2. Create a .env file containing your eid password. If you need help with this and are a UT student, please contact me using the email at the bottom of the instructions.
+#### 2. Create a `.env` file containing your eid password. If you need help with this and are a UT student, please contact me using the email at the bottom of the instructions.
 
 ## Usage:
 
-#### 1. Open the the notebook scrape_step4.ipynb
+#### 1. Open the the notebook `scrape_step4.ipynb`
 
 #### 2. Replace all the variables at the top with names relevant to you. The notebook has detailed instructions in the first cell.
 
