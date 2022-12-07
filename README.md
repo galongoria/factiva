@@ -21,9 +21,9 @@ or
 
 #### 2. In the root directory, or otherwise `C:/Users/usr/`, create a new folder and store 'chromedriver.exe' that was downloaded in the previous step.
 
-* For the instructions refer to this folder as `step4_directory`, but you can name it whatever you'd like.
+* For these instructions refer to this folder as `step4_directory`, but you can name it whatever you'd like.
 
-* If my profile on Windows was called factiva_user, the path to chromedriver would be: `C:/Users/factiva_user/step4_directory/chromedriver.exe`
+* If my profile on Windows was called "bevo_longhorn", the path to chromedriver would be: `C:/Users/factiva_user/step4_directory/chromedriver.exe`
 
 #### 3. The next step is dependent on where your Chrome data is stored. 
 
@@ -35,7 +35,7 @@ cd C:\Program Files (x86)\Google\Chrome\Application
 
 * If there is not error message, continue to step 4.
 
-* If you receive an error message saying, "The system cannot find the path specified.": , then try the following command:
+* If you receive an error message saying, "The system cannot find the path specified.", try the following command:
                 
 ```
 cd C:\Program Files\Google\Chrome\Application
@@ -64,15 +64,17 @@ cd C:\Program Files\Google\Chrome\Application
 chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\galon\step4_directory\localhost"
 ```
 
+Depending on the command that worked for you in this step
+
 ## Setup – Mac Users
 
 #### 1. Go to https://chromedriver.chromium.org/downloads and install the chromedriver that supports your version of Chrome
 
 #### 2. In the root directory, or otherwise `/Users/usr' create a new folder and store 'chromedriver.exe' that was downloaded in the previous step.
 
-* For the instructions refer to this folder as `step4_directory`
+* For these instructions refer to this folder as `step4_directory`
 
-* If my profile on Mac was called factiva_user, the path to chromedriver would be: `/Users/factiva_user/step4_directory/chromedriver`
+* If my profile on Mac was called "bevo_longhorn", the path to chromedriver would be: `/Users/factiva_user/step4_directory/chromedriver`
 
 #### 3. Enter the following command in your terminal:
 
