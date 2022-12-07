@@ -96,9 +96,9 @@ Depending on the command that worked for you in Step 3
 pip3 install pandas python-dotenv selenium regex bs4
 ```
 
-__Optional – only necessary if you want to contribute__
 
-#### 2. Create a `.env` file containing your eid password. If you need help with this and are a UT student, please contact me using the email at the bottom of the instructions.
+
+#### 2. __Optional – only necessary if you want to contribute__ \n Create a `.env` file containing your eid password. If you need help with this and are a UT student, please contact me using the email at the bottom of the instructions.
 
 ## Usage:
 
