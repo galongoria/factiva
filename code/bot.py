@@ -68,7 +68,7 @@ def get_new_page(driver, wait, ut_eid, eid_password):
             time.sleep(3)
             attempts += 1
 
-def enter_search(driver, wait, date_dict, search):
+def enter_search(driver, wait, date_dict, search, ut_eid,eid_password):
 
     attempts = 0
     while attempts < 10:
