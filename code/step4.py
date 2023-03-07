@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-
 load_dotenv()
 from datetime import datetime
 import pickle, json, os
@@ -50,27 +49,23 @@ def check_input_file(input_company_file):
         pass
 
 
-def save_progress(searches_pickle, articles, name, df, output_file_name):
+def save_progress(searches_pickle, articles, df, output_file_name, PICKLE_OUTPATH):
 
     CSV_OUTPATH = os.path.join(CLEAN_DIR, f"{output_file_name}.csv")
     ARTICLE_DIR = os.path.join("..\\data", "article_hrefs", output_file_name)
     os.makedirs(ARTICLE_DIR, exist_ok=True)
-
-    try:
-        searches_pickle.pop(0)
-        for name, article_list in articles.items():
-            if len(article_list) == 0:
-                continue
-            else:
-                with open(os.path.join(ARTICLE_DIR, f"{name}.json"), "w+") as file:
-                    file.write("\n")
-                    json.dump(article_list, file)
-                    file.write("\n")
-        df.to_csv(CSV_OUTPATH, mode="a", header=not os.path.exists(CSV_OUTPATH))
-        with open(PICKLE_OUTPATH, "wb") as file:
-            pickle.dump(searches_pickle, file)
-    except:
-        return "Error when saving."
+    searches_pickle.pop(0)
+    for name, article_list in articles.items():
+        if len(article_list) == 0:
+            continue
+        else:
+            with open(os.path.join(ARTICLE_DIR, f"{name}.json"), "w+") as file:
+                file.write("\n")
+                json.dump(article_list, file)
+                file.write("\n")
+    df.to_csv(CSV_OUTPATH, mode="a", header=not os.path.exists(CSV_OUTPATH))
+    with open(PICKLE_OUTPATH, "wb") as file:
+        pickle.dump(searches_pickle, file)
 
 
 def gen_searches(input_company_file, PICKLE_OUTPATH):
@@ -146,7 +141,7 @@ def year_none_dataframe(co_code, pub_code, year):
     return df
 
 
-def get_year_info(driver, wait):
+def get_year_info(driver, wait, eid_username, eid_password):
 
     duplicates = 0
     counter = {"1": 0, "2": 0, "3": 0, "4": 0}
@@ -158,22 +153,22 @@ def get_year_info(driver, wait):
         next_button = find_next_button(driver.page_source)
         if next_button != None:
             counter, total, article_links = get_page_info(
-                soup, counter, total, article_links
+                driver.page_source, counter, total, article_links
             )
-            duplicates += get_duplicates(soup)
+            duplicates += get_duplicates(driver.page_source)
             next_page(driver, wait)
 
         elif next_button == None:
             counter, total, article_links = get_page_info(
-                soup, counter, total, article_links
+                driver.page_source, counter, total, article_links
             )
-            duplicates += get_duplicates(soup)
+            duplicates += get_duplicates(driver.page_source)
             counter_total = sum(list(counter.values()))
 
             if (total - duplicates) != counter_total:
                 return "Did not count duplicates properly; increase sleep time if necessary"
             else:
-                get_new_page(driver, wait, ut_eid, eid_password)
+                get_new_page(driver, wait, eid_username, eid_password)
                 return counter, article_links
 
 
@@ -182,7 +177,6 @@ def get_all_frequencies(
 ):
 
     PICKLE_OUTPATH = os.path.join("pickles", f"{input_company_file}_searches.pickle")
-
     searches = gen_searches(input_company_file, PICKLE_OUTPATH)
     searches_pickle = searches.copy()
     driver, wait = set_driver(driver_path)
@@ -207,11 +201,15 @@ def get_all_frequencies(
             "toy": 2020,
         }
         enter_search(driver, wait, date_dict, search, eid_username, eid_password)
-        results = check_frequency_chart(driver.page_source, "html.parser")
+        results = check_frequency_chart(driver.page_source)
 
         if results == None:
             df = all_none_dataframe(co_code, pub_code)
-            save_progress(searches_pickle, articles, name, df, output_file_name)
+            try:
+                save_progress(searches_pickle, articles,df, output_file_name, PICKLE_OUTPATH)
+            except:
+                print("Error when saving")
+                return None
 
         else:
 
@@ -239,7 +237,7 @@ def get_all_frequencies(
                     enter_search(
                         driver, wait, date_dict, search, eid_username, eid_password
                     )
-                    counter, article_links = get_year_info(driver, wait)
+                    counter, article_links = get_year_info(driver, wait, eid_username, eid_password)
                     df = pd.concat(
                         [
                             df,
@@ -268,4 +266,9 @@ def get_all_frequencies(
                 else:
                     df = pd.concat([df, year_none_dataframe(co_code, pub_code, year)])
 
-            save_progress(searches_pickle, articles, name, df, output_file_name)
+            try:
+                save_progress(searches_pickle, articles,df, output_file_name, PICKLE_OUTPATH)
+            except:
+                print('Error when saving')
+                return None
+
