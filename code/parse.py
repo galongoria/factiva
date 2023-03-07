@@ -20,7 +20,11 @@ def get_page_info(soup, counter, total, article_links):
     }
     headlines = soup.find_all("tr", {"class": "headline"})
     total += len(headlines)
-
+    
+    if total == 0:
+        
+        return counter, total, None
+    
     if len(set(headline.text.split(".")[0] for headline in headlines)) == 1:
 
         headline = headlines[0]
