@@ -12,6 +12,7 @@ from selenium.common.exceptions import (
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 import time, os
 from bs4 import BeautifulSoup
 
@@ -49,27 +50,23 @@ def open_page(driver, wait, eid_username, eid_password):
         pass
 
 
-def get_new_page(driver, wait):
+def get_new_page(driver, wait, ut_eid, eid_password):
 
     attempts = 0
-
     while attempts < 10:
-
         try:
-
             driver.get("https://guides.lib.utexas.edu/db/144")
-            front_text = BeautifulSoup(driver.page_source, 'html.parser')
-            if (front_text != None) and ("Sign in with your UT EID" in front_text):
-                login(driver, wait, "gal767", os.getenv("eid_password"))
-
+            time.sleep(5)
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            if soup.h1.text.strip() == "Sign in with your UT EID":
+                print("Session expired, restarting...")
+                login(driver, wait, ut_eid, eid_password)
+                continue
             break
         except TimeoutException as timeout_error:
-
             pass
             time.sleep(3)
             attempts += 1
-
-
 
 def enter_search(driver, wait, date_dict, search):
 
@@ -120,7 +117,7 @@ def enter_search(driver, wait, date_dict, search):
 
             pass
             time.sleep(3)
-            get_new_page(driver, wait)
+            get_new_page(driver, wait, ut_eid,eid_password)
             attempts += 1
 
 
@@ -173,9 +170,10 @@ def login(driver, wait, eid_username, eid_password):
 
 def set_driver(path):
 
-    option = webdriver.ChromeOptions()
-    option.add_experimental_option("debuggerAddress", "localhost:9222")
-    driver = webdriver.Chrome(executable_path=path, options=option)
+    options = Options()
+    options.add_argument("--remote-debugging-port=9222")
+    options.add_argument("--user-data-dir=C:\\Users\\galon\\cd_secure\\localhost")
+    driver = webdriver.Chrome(executable_path=path, chrome_options=options)
     wait = WebDriverWait(driver, 10)
     driver.set_page_load_timeout(20)
 
