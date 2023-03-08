@@ -10,7 +10,7 @@ from parse import (
     check_frequency_chart,
     find_next_button,
 )
-from bot import open_page, get_new_page, enter_search, next_page, login, set_driver
+from bot import open_page, enter_search, next_page, login, set_driver
 
 
 ### Directories ###
@@ -32,10 +32,10 @@ def delete_old_pickle(input_company_file):
         if file == ".ipynb_checkpoints":
             continue
         elif file != f"{input_company_file}_searches.pickle":
-            os.remove(file)
+            os.remove(os.path.join("pickles", file))
 
 
-def check_input_file(input_company_file):
+def read_input_file(input_company_file):
 
     try:
         df = pd.read_csv(os.path.join(RAW_DIR, f"{input_company_file}.csv"))
@@ -78,7 +78,7 @@ def gen_searches(input_company_file, PICKLE_OUTPATH):
             if not searches:
                 return "You have completed this assignment. Please change the input file before running the program."
     except FileNotFoundError:
-        co_df = read_input_file()
+        co_df = read_input_file(input_company_file)
         companies = [
             str(code).lower()
             for code in co_df[~co_df["factiva_company_code"].isnull()][
@@ -168,18 +168,18 @@ def get_year_info(driver, wait, eid_username, eid_password):
             if (total - duplicates) != counter_total:
                 return "Did not count duplicates properly; increase sleep time if necessary"
             else:
-                get_new_page(driver, wait, eid_username, eid_password)
+                open_page(driver, wait, eid_username, eid_password)
                 return counter, article_links
 
 
 def get_all_frequencies(
-    eid_username, eid_password, driver_path, input_company_file, output_file_name
+    eid_username, eid_password, driver_folder, input_company_file, output_file_name
 ):
 
     PICKLE_OUTPATH = os.path.join("pickles", f"{input_company_file}_searches.pickle")
     searches = gen_searches(input_company_file, PICKLE_OUTPATH)
     searches_pickle = searches.copy()
-    driver, wait = set_driver(driver_path)
+    driver, wait = set_driver(driver_folder)
     open_page(driver, wait, eid_username, eid_password)
 
     print(
