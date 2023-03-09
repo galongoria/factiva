@@ -2,8 +2,9 @@ from bs4 import BeautifulSoup
 import regex as re
 
 
-def get_page_info(soup, counter, total, article_links):
+def get_page_info(text, counter, total, article_links):
 
+    soup = BeautifulSoup(text, 'html.parser')
     map_dict = {
         "January": "1",
         "February": "1",
@@ -62,7 +63,14 @@ def get_page_info(soup, counter, total, article_links):
     return counter, total, article_links
 
 
-def get_duplicates(soup):
+def find_next_button(text):
+
+    soup = BeautifulSoup(text, 'html.parser')
+    return soup.find("a", {"class", "nextItem"})
+
+def get_duplicates(text):
+
+    soup = BeautifulSoup(text, 'html.parser')
 
     return int(soup.find("span", {"id": "dedupSummary"}).text.split(":")[1].strip())
 
@@ -77,7 +85,9 @@ def get_years(soup):
     return years
 
 
-def check_frequency_chart(soup):
+def check_frequency_chart(text):
+
+    soup = BeautifulSoup(text, 'html.parser')
 
     if soup.find('tr', {'class': 'headline'}) == None:
 
