@@ -1,2 +1,3 @@
-2023/03/08-23:02:45.790 4020 Creating DB C:\Users\galon\factiva\code\driver\localhost\Default\shared_proto_db\metadata since it was missing.
-2023/03/08-23:02:45.797 4020 Reusing MANIFEST C:\Users\galon\factiva\code\driver\localhost\Default\shared_proto_db\metadata/MANIFEST-000001
+2023/03/09-00:02:14.076 1f80 Reusing MANIFEST C:\Users\galon\factiva\code\driver\localhost\Default\shared_proto_db\metadata/MANIFEST-000001
+2023/03/09-00:02:14.076 1f80 Recovering log #3
+2023/03/09-00:02:14.076 1f80 Reusing old log C:\Users\galon\factiva\code\driver\localhost\Default\shared_proto_db\metadata/000003.log 

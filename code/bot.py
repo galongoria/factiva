@@ -177,6 +177,5 @@ def set_driver():
 		)
 	wait = WebDriverWait(driver, 10)
 	driver.set_page_load_timeout(20)
-
 	return driver, wait
 

@@ -3,6 +3,7 @@ load_dotenv()
 from datetime import datetime
 import pickle, json, os
 import pandas as pd
+import regex as re
 from parse import (
     get_page_info,
     get_duplicates,
@@ -49,9 +50,19 @@ def read_input_file(input_company_file):
         pass
 
 
+def gen_output_name(input_company_file, last_name):
+    
+    output_name = "STEP4_Company_Frequency_"
+    try:
+        company_range = re.findall('No\d*_\d*',input_company_file)[0]
+    except IndexError:
+        print("Make suret the input file name includes a range of values, eg: No5301_5350")
+    return f"{output_name}{company_range}_{last_name}"
+
+
 def save_progress(searches_pickle, articles, df, output_file_name, PICKLE_OUTPATH):
 
-    output = f"{input_company_file}_frequencies"
+
     CSV_OUTPATH = os.path.join(CLEAN_DIR, f"{output_file_name}.csv")
     ARTICLE_DIR = os.path.join("..\\data", "article_hrefs", output_file_name)
     os.makedirs(ARTICLE_DIR, exist_ok=True)
@@ -174,9 +185,9 @@ def get_year_info(driver, wait, eid_username, eid_password):
 
 
 def get_all_frequencies(
-    eid_username, eid_password, input_company_file, output_file_name
+    eid_username, eid_password, last_name, input_company_file,
 ):
-
+    output_file_name = gen_output_name(input_company_file, last_name)
     PICKLE_OUTPATH = os.path.join("pickles", f"{input_company_file}_searches.pickle")
     searches = gen_searches(input_company_file, PICKLE_OUTPATH)
     searches_pickle = searches.copy()
