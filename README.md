@@ -93,31 +93,18 @@ Depending on the command that worked for you in Step 3
 #### 1. Install the necessary packages by either moving into the repository and installing the requirements.txt, or by simply opening the terminal and typing:
 
 ```
-pip3 install pandas python-dotenv selenium regex bs4
+python -m pip install pandas python-dotenv selenium regex bs4 webdriver_manager
 ```
 
 
-
-#### 2. __Optional – only necessary if you want to contribute__
-
-#### Create a `.env` file containing your eid password. If you need help with this and are a UT student, please contact me using the email at the bottom of the instructions.
-
 ## Usage:
 
-#### 1. Open the the notebook `scrape_step4.ipynb`
+#### 1. Open the the notebook `main.ipynb`
 
-#### 2. Replace all the variables at the top with names relevant to you. The notebook has detailed instructions in the first cell.
+#### 2. Enter your variables
 
 #### 3. Run the whole notebook
 
-## Side notes:
-
-This scraper will automatically search and store data in your repo. If you stop the scraper or it stops because of an error, it will pick up where it left off. However, it will only pick up after the last full year completed.
-
-
-### __ONCE THE PROGRAM HAS RUN ONCE, DO NOT DELETE `searches.pickle` UNTIL THE LIST HAS BEEN EXHAUSTED__ ###
-
-If you delete 'searches.pickle', you will lose where you left off and will need to start the scraping process from the first search.
 
 
 Next steps:
