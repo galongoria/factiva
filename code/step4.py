@@ -51,6 +51,7 @@ def read_input_file(input_company_file):
 
 def save_progress(searches_pickle, articles, df, output_file_name, PICKLE_OUTPATH):
 
+    output = f"{input_company_file}_frequencies"
     CSV_OUTPATH = os.path.join(CLEAN_DIR, f"{output_file_name}.csv")
     ARTICLE_DIR = os.path.join("..\\data", "article_hrefs", output_file_name)
     os.makedirs(ARTICLE_DIR, exist_ok=True)
@@ -173,13 +174,13 @@ def get_year_info(driver, wait, eid_username, eid_password):
 
 
 def get_all_frequencies(
-    eid_username, eid_password, driver_folder, input_company_file, output_file_name
+    eid_username, eid_password, input_company_file, output_file_name
 ):
 
     PICKLE_OUTPATH = os.path.join("pickles", f"{input_company_file}_searches.pickle")
     searches = gen_searches(input_company_file, PICKLE_OUTPATH)
     searches_pickle = searches.copy()
-    driver, wait = set_driver(driver_folder)
+    driver, wait = set_driver()
     open_page(driver, wait, eid_username, eid_password)
 
     print(

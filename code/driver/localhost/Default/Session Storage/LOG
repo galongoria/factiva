@@ -1,0 +1,35 @@
+2023/03/08-23:02:45.696 8d20 Creating DB C:\Users\galon\factiva\code\driver\localhost\Default\Session Storage since it was missing.
+2023/03/08-23:02:45.702 8d20 Reusing MANIFEST C:\Users\galon\factiva\code\driver\localhost\Default\Session Storage/MANIFEST-000001
+2023/03/08-23:05:16.165 8d20 Level-0 table #5: started
+2023/03/08-23:05:16.171 8d20 Level-0 table #5: 23270 bytes OK
+2023/03/08-23:05:16.174 8d20 Delete type=0 #3
+2023/03/08-23:06:07.393 8d20 Level-0 table #7: started
+2023/03/08-23:06:07.399 8d20 Level-0 table #7: 18823 bytes OK
+2023/03/08-23:06:07.401 8d20 Delete type=0 #4
+2023/03/08-23:06:58.955 8d20 Level-0 table #9: started
+2023/03/08-23:06:58.963 8d20 Level-0 table #9: 29645 bytes OK
+2023/03/08-23:06:58.966 8d20 Delete type=0 #6
+2023/03/08-23:08:02.197 530c Level-0 table #11: started
+2023/03/08-23:08:02.203 530c Level-0 table #11: 37727 bytes OK
+2023/03/08-23:08:02.205 530c Delete type=0 #8
+2023/03/08-23:08:59.611 530c Level-0 table #13: started
+2023/03/08-23:08:59.618 530c Level-0 table #13: 40326 bytes OK
+2023/03/08-23:08:59.620 530c Delete type=0 #10
+2023/03/08-23:10:04.589 8d20 Level-0 table #15: started
+2023/03/08-23:10:04.594 8d20 Level-0 table #15: 47019 bytes OK
+2023/03/08-23:10:04.598 8d20 Delete type=0 #12
+2023/03/08-23:10:04.600 8d20 Compacting 4@0 + 1@1 files
+2023/03/08-23:10:04.608 8d20 Generated table #16@0: 4 keys, 46897 bytes
+2023/03/08-23:10:04.608 8d20 Compacted 4@0 + 1@1 files => 46897 bytes
+2023/03/08-23:10:04.608 8d20 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/03/08-23:10:04.610 8d20 Delete type=2 #7
+2023/03/08-23:10:04.610 8d20 Delete type=2 #9
+2023/03/08-23:10:04.610 8d20 Delete type=2 #11
+2023/03/08-23:10:04.610 8d20 Delete type=2 #13
+2023/03/08-23:10:04.610 8d20 Delete type=2 #15
+2023/03/08-23:11:06.932 8d20 Level-0 table #18: started
+2023/03/08-23:11:06.939 8d20 Level-0 table #18: 55677 bytes OK
+2023/03/08-23:11:06.942 8d20 Delete type=0 #14
+2023/03/08-23:12:07.653 8d20 Level-0 table #20: started
+2023/03/08-23:12:07.662 8d20 Level-0 table #20: 62168 bytes OK
+2023/03/08-23:12:07.665 8d20 Delete type=0 #17

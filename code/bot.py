@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 load_dotenv()
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import (
@@ -13,9 +14,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
-import time, os
+import time, os, pathlib
 from bs4 import BeautifulSoup
 from sys import platform
+
+CODE_DIR = pathlib.Path().absolute()
+LOCALHOST_DIR = os.path.join(CODE_DIR, 'driver', 'localhost')
 
 
 def open_page(driver, wait, eid_username, eid_password):
@@ -24,10 +28,10 @@ def open_page(driver, wait, eid_username, eid_password):
 	while attempts < 10:
 		try:
 			driver.get("https://guides.lib.utexas.edu/db/144")
-			time.sleep(10)
+			time.sleep(6)
 			try:
 				driver.find_element(By.XPATH, '//label[@for="email"]')
-				print('Session expired, restarting...')
+				#'Session expired, restarting...'
 				time.sleep(3)
 				attempts += 1
 				continue
@@ -35,7 +39,7 @@ def open_page(driver, wait, eid_username, eid_password):
 				pass
 			h1 = driver.find_element(By.XPATH, '//h1')
 			if h1.text.strip() == "Sign in with your UT EID":
-				print('Session expired, restarting...')		
+				#'Session expired, restarting...'	
 				login(driver, wait, eid_username, eid_password)
 				time.sleep(3)
 				attempts += 1
@@ -123,7 +127,8 @@ def next_page(driver, wait):
 			ElementClickInterceptedException,
 			UnexpectedAlertPresentException,
 		):
-			print("Click next failed")
+			#"Click next failed"
+
 			time.sleep(3)
 			attempts += 1
 
@@ -141,7 +146,9 @@ def login(driver, wait, eid_username, eid_password):
 			)
 		).click()
 	except TimeoutException:
-		print("Duo cookies still valid; proceeding to search page...")
+
+		pass
+		#"Duo cookies still valid; proceeding to search page..."
 		
 def make_paths(driver_folder):
 	
@@ -156,13 +163,18 @@ def make_paths(driver_folder):
 	return driver_path, profile_path
 
 
-def set_driver(driver_folder):
-	
-	driver_path, profile_path = make_paths(driver_folder)
+def set_driver():
+
+	DRIVER_DIR =os.path.join(CODE_DIR, 'driver')
+	LOCALHOST_DIR = os.path.join(DRIVER_DIR, 'localhost')
+	os.makedirs(DRIVER_DIR, exist_ok=True)
+	os.makedirs(LOCALHOST_DIR, exist_ok=True)
 	options = Options()
 	options.add_argument("--remote-debugging-port=9222")
-	options.add_argument(f"--user-data-dir={profile_path}")
-	driver = webdriver.Chrome(executable_path=driver_path, chrome_options=options)
+	options.add_argument(f"--user-data-dir={LOCALHOST_DIR}")
+	driver = webdriver.Chrome(
+		executable_path=ChromeDriverManager(path=DRIVER_DIR).install(), chrome_options=options
+		)
 	wait = WebDriverWait(driver, 10)
 	driver.set_page_load_timeout(20)
 
