@@ -22,7 +22,7 @@ python -m pip install pandas python-dotenv selenium regex bs4 webdriver_manager
 ```
 
 
-## Usage:
+## Usage
 
 #### 1. Open the the notebook `main.ipynb`
 
