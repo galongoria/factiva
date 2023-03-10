@@ -31,7 +31,7 @@ python -m pip install pandas python-dotenv selenium regex bs4 webdriver_manager
 ```
 ut_eid = "abc123"
 
-eid_password = "myutpassword
+eid_password = "myutpassword"
 
 last_name = "Kaplan"
 
