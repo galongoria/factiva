@@ -17,6 +17,7 @@ from bot import open_page, enter_search, next_page, login, set_driver
 ### Directories ###
 RAW_DIR = os.path.join("..\\data", "raw")
 CLEAN_DIR = os.path.join("..\\data", "clean")
+ARTICLE_DIR = os.path.join("..\\data", "article_hrefs")
 
 ### Input files ###
 SOURCE_PATH = os.path.join(RAW_DIR, "source_codes.csv")
@@ -25,9 +26,11 @@ SOURCE_PATH = os.path.join(RAW_DIR, "source_codes.csv")
 ### Make directories ###
 os.makedirs(CLEAN_DIR, exist_ok=True)
 os.makedirs("pickles", exist_ok=True)
-
+os.makedirs(ARTICLE_DIR, exist_ok=True)
 
 def delete_old_pickle(input_company_file):
+
+    """Takes in the input file name and deletes any pickles that do not contain the input string. """
 
     for file in os.listdir("pickles"):
         if file == ".ipynb_checkpoints":
@@ -37,6 +40,8 @@ def delete_old_pickle(input_company_file):
 
 
 def read_input_file(input_company_file):
+
+    """Takes the input file string and uses it to read in either a csv or xlsx"""
 
     try:
         df = pd.read_csv(os.path.join(RAW_DIR, f"{input_company_file}.csv"))
@@ -51,6 +56,9 @@ def read_input_file(input_company_file):
 
 
 def gen_output_name(input_company_file, last_name):
+
+    """Takes in the input string and last name variables to generate an output file name.
+    """
     
     output_name = "STEP4_Company_Frequency_"
     try:
@@ -62,10 +70,11 @@ def gen_output_name(input_company_file, last_name):
 
 def save_progress(searches_pickle, articles, df, output_file_name, PICKLE_OUTPATH):
 
+    """Writes new lines in the csv, saves article json, and creates a new pickle to save progress."""
+
 
     CSV_OUTPATH = os.path.join(CLEAN_DIR, f"{output_file_name}.csv")
     ARTICLE_DIR = os.path.join("..\\data", "article_hrefs", output_file_name)
-    os.makedirs(ARTICLE_DIR, exist_ok=True)
     searches_pickle.pop(0)
     for name, article_list in articles.items():
         if len(article_list) == 0:
@@ -81,6 +90,8 @@ def save_progress(searches_pickle, articles, df, output_file_name, PICKLE_OUTPAT
 
 
 def gen_searches(input_company_file, PICKLE_OUTPATH):
+
+    """Generates searches from either a pickle if it exists or the input csv files."""
 
     delete_old_pickle(input_company_file)
 
@@ -110,6 +121,8 @@ def gen_searches(input_company_file, PICKLE_OUTPATH):
 
 def all_none_dataframe(co_code, pub_code):
 
+    """Creates dataframe with no frequencies for the year range 1995-2020."""
+
     for year in range(1995, 2021):
         if year == 1995:
             info_dict = {
@@ -134,6 +147,8 @@ def all_none_dataframe(co_code, pub_code):
 
 def year_none_dataframe(co_code, pub_code, year):
 
+    """Creates a dataframe with no frequencies for a single year."""
+
     if year < 2020:
         info_dict = {
             "year": [year, year, year, year],
@@ -154,6 +169,8 @@ def year_none_dataframe(co_code, pub_code, year):
 
 
 def get_year_info(driver, wait, eid_username, eid_password):
+
+    """Gets information from every page in a given search year including duplicates, article json, and article frequencies."""
 
     duplicates = 0
     counter = {"1": 0, "2": 0, "3": 0, "4": 0}
@@ -187,6 +204,8 @@ def get_year_info(driver, wait, eid_username, eid_password):
 def get_all_frequencies(
     eid_username, eid_password, last_name, input_company_file,
 ):
+    """This is the main function that iterates through every search and scrapes all information from Factiva, while saving progess after each search"""
+
     output_file_name = gen_output_name(input_company_file, last_name)
     PICKLE_OUTPATH = os.path.join("pickles", f"{input_company_file}_searches.pickle")
     searches = gen_searches(input_company_file, PICKLE_OUTPATH)
