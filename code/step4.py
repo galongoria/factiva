@@ -15,9 +15,9 @@ from bot import open_page, enter_search, next_page, login, set_driver
 
 
 ### Directories ###
-RAW_DIR = os.path.join("..\\data", "raw")
-CLEAN_DIR = os.path.join("..\\data", "clean")
-ARTICLE_DIR = os.path.join("..\\data", "article_hrefs")
+RAW_DIR = os.path.join(r"../data", "raw")
+CLEAN_DIR = os.path.join(r"../data", "clean")
+ARTICLE_DIR = os.path.join(r"../data", "article_hrefs")
 
 ### Input files ###
 SOURCE_PATH = os.path.join(RAW_DIR, "source_codes.csv")
