@@ -74,13 +74,14 @@ def save_progress(searches_pickle, articles, df, output_file_name, PICKLE_OUTPAT
 
 
     CSV_OUTPATH = os.path.join(CLEAN_DIR, f"{output_file_name}.csv")
-    ARTICLE_DIR = os.path.join("..\\data", "article_hrefs", output_file_name)
+    SEARCH_ARTICLE_DIR = os.path.join("..\\data", "article_hrefs", output_file_name)
+    os.makedirs(SEARCH_ARTICLE_DIR, exist_ok =True)
     searches_pickle.pop(0)
     for name, article_list in articles.items():
         if len(article_list) == 0:
             continue
         else:
-            with open(os.path.join(ARTICLE_DIR, f"{name}.json"), "w+") as file:
+            with open(os.path.join(SEARCH_ARTICLE_DIR, f"{name}.json"), "w+") as file:
                 file.write("\n")
                 json.dump(article_list, file)
                 file.write("\n")
@@ -296,7 +297,7 @@ def get_all_frequencies(
                     articles[f"{co_code}_{pub_code}_{year}"].append(article_links)
                 else:
                     df = pd.concat([df, year_none_dataframe(co_code, pub_code, year)])
-
+            
             try:
                 save_progress(searches_pickle, articles,df, output_file_name, PICKLE_OUTPATH)
             except:
